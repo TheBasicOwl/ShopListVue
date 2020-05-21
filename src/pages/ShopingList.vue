@@ -1,40 +1,42 @@
 <template>
   <div id="app">
-    <h2>{{$route.params.listname}}</h2>
-    <p>What to Buy</p>
-    <input style="width: 100%" type="text" placeholder="What to buy" v-model="Input.name"/>
-    <p>Price</p>
-    <input style="width: 100%" type="text" placeholder="Price" v-model="Input.price"/>
-    <p>Amout</p>
-    <input style="width: 100%" type="number" placeholder="Amout" v-model="Input.amout"/>
-    <button style="width: 100%; margin: 1em 0px 0px 0px;" v-on:click="AddShopList">Add</button>
-    <h3>Shop Items</h3>
-    <ShopItem
-      v-for="item in shoplists" 
-      v-bind:shopitem="item"
-      v-bind:key="item.id"
-      v-on:EditShopItem="SaveShopList"
-      v-on:deleteshop="DeleteShopList"
-    >
-    </ShopItem>
+    <div id="Input">
+      <p>What to Buy</p>
+      <input style="width: 100%" type="text" placeholder="What to buy" v-model="Input.name" />
+      <p>Price</p>
+      <input style="width: 100%" type="text" placeholder="Price" v-model="Input.price" />
+      <p>Amout</p>
+      <input style="width: 100%" type="number" placeholder="Amout" v-model="Input.amout" />
+      <button style="width: 100%; margin: 1em 0px 0px 0px;" v-on:click="AddShopList">Add</button>
+    </div>
+    <div id="Items">
+      <h3>Shop Items</h3>
+      <ShopItem
+        v-for="item in shoplists"
+        v-bind:shopitem="item"
+        v-bind:key="item.id"
+        v-on:EditShopItem="SaveShopList"
+        v-on:deleteshop="DeleteShopList"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import ShopItem from '../components/shopitem.vue';
+import ShopItem from "../components/shopitem.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-      name: '',
+      name: "",
       nextnum: 0,
       Input: {
-        name: '',
+        name: "",
         amout: 0,
-        price: 0,
+        price: 0
       },
-      shoplists: [],
+      shoplists: []
     };
   },
   mounted() {
@@ -42,11 +44,13 @@ export default {
   },
   methods: {
     updateList() {
-      this.name = this.$route.params.listname; 
+      this.name = this.$route.params.listname;
       this.shoplists = [];
       if (localStorage.getItem(`${this.name}-list`)) {
         try {
-          this.shoplists = JSON.parse(localStorage.getItem(`${this.name}-list`));
+          this.shoplists = JSON.parse(
+            localStorage.getItem(`${this.name}-list`)
+          );
           this.nextnum = this.shoplists[this.shoplists.length - 1].id;
         } catch (e) {
           localStorage.removeItem(`${this.name}-list`);
@@ -59,13 +63,13 @@ export default {
         name: this.Input.name,
         amout: this.Input.amout,
         price: this.Input.price,
-        done: false,
+        done: false
       };
       shop.id = this.nextnum;
       this.shoplists.push(shop);
 
       // Reset Input values
-      this.Input.name = '';
+      this.Input.name = "";
       this.Input.amout = 0;
       this.Input.price = 0;
 
@@ -80,16 +84,16 @@ export default {
       const parsed = JSON.stringify(this.shoplists);
       localStorage.setItem(`${this.name}-list`, parsed);
       this.$root.$children[0].updateLinks();
-    },
+    }
   },
   watch: {
-    $route (to, from){
+    $route(to, from) {
       this.updateList();
     }
   },
   components: {
-    ShopItem,
-  },
+    ShopItem
+  }
 };
 </script>
 
