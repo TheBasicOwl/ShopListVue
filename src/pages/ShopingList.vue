@@ -1,16 +1,17 @@
 <template>
   <div id="app">
     <h2>{{$route.params.listname}}</h2>
-    <adding-item-container @OnAdd="AddShopList"/>
     <h3>Shop Items</h3>
-    <ShopItem
-      v-for="item in shoplists" 
-      v-bind:shopitem="item"
-      v-bind:key="item.id"
-      v-on:EditShopItem="SaveShopList"
-      v-on:deleteshop="DeleteShopList"
-    >
-    </ShopItem>
+    <div id="ShopList">
+      <ShopItem
+        v-for="item in shoplists" 
+        v-bind:shopitem="item"
+        v-bind:key="item.id"
+        v-on:EditShopItem="SaveShopList"
+        v-on:deleteshop="DeleteShopList"
+      />
+    </div>
+    <adding-item-container @OnAdd="AddShopList"/>
   </div>
 </template>
 
