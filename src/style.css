@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#menu {
+  margin: 1px 2px 1px 1px;
+}
+
+#menu h2 {
+  text-align: center;
+}
+
+#menu nav {
+  background-color: cadetblue;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-100%, 0);
+  padding: 0.3em;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  transition: 1s;
+}
+
+#menu nav.open {
+  transform: translate(0, 0);
+}
+
+#menu nav a {
+  color: white;
+  text-decoration: none;
+}
+
+#menu nav a:hover {
+  color: blue;
+  text-decoration: none;
+}
+
+#menu nav .router-link-active {
+  color: blue;
+}
+
+#Items h3 {
+  text-align: center;
+}
+
+.navIcon {
+  background-color: teal;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  color: white;
+  padding: 0.2em;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}

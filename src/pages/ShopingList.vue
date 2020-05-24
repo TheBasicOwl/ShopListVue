@@ -20,17 +20,17 @@ import ShopItem from '../components/shopitem.vue';
 import AddingItemContainer from '../container/AddingItemContainer.vue'
 
 export default {
-  name: 'App',
+  name: "App",
   data() {
     return {
-      name: '',
+      name: "",
       nextnum: 0,
       Input: {
-        name: '',
+        name: "",
         amout: 0,
-        price: 0,
+        price: 0
       },
-      shoplists: [],
+      shoplists: []
     };
   },
   mounted() {
@@ -38,11 +38,13 @@ export default {
   },
   methods: {
     updateList() {
-      this.name = this.$route.params.listname; 
+      this.name = this.$route.params.listname;
       this.shoplists = [];
       if (localStorage.getItem(`${this.name}-list`)) {
         try {
-          this.shoplists = JSON.parse(localStorage.getItem(`${this.name}-list`));
+          this.shoplists = JSON.parse(
+            localStorage.getItem(`${this.name}-list`)
+          );
           this.nextnum = this.shoplists[this.shoplists.length - 1].id;
         } catch (e) {
           localStorage.removeItem(`${this.name}-list`);
@@ -62,7 +64,7 @@ export default {
       this.shoplists.push(shop);
 
       // Reset Input values
-      this.Input.name = '';
+      this.Input.name = "";
       this.Input.amout = 0;
       this.Input.price = 0;
 
@@ -77,10 +79,10 @@ export default {
       const parsed = JSON.stringify(this.shoplists);
       localStorage.setItem(`${this.name}-list`, parsed);
       this.$root.$children[0].updateLinks();
-    },
+    }
   },
   watch: {
-    $route (to, from){
+    $route(to, from) {
       this.updateList();
     }
   },
