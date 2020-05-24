@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import './app.css'
+
 export default {
   name: 'App',
   data() {
@@ -33,7 +35,10 @@ export default {
     },
     AddList() {
         var name = prompt("Please enter your list name");
-        this.$router.push(`/list/${name}`);
+        if(name != null)
+        {
+          this.$router.push(`/list/${name}`);
+        }
     }
   },
   mounted() {

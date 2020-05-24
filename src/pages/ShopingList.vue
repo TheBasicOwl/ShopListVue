@@ -1,13 +1,7 @@
 <template>
   <div id="app">
     <h2>{{$route.params.listname}}</h2>
-    <p>What to Buy</p>
-    <input style="width: 100%" type="text" placeholder="What to buy" v-model="Input.name"/>
-    <p>Price</p>
-    <input style="width: 100%" type="text" placeholder="Price" v-model="Input.price"/>
-    <p>Amout</p>
-    <input style="width: 100%" type="number" placeholder="Amout" v-model="Input.amout"/>
-    <button style="width: 100%; margin: 1em 0px 0px 0px;" v-on:click="AddShopList">Add</button>
+    <adding-item-container @OnAdd="AddShopList"/>
     <h3>Shop Items</h3>
     <ShopItem
       v-for="item in shoplists" 
@@ -22,6 +16,7 @@
 
 <script>
 import ShopItem from '../components/shopitem.vue';
+import AddingItemContainer from '../container/AddingItemContainer.vue'
 
 export default {
   name: 'App',
@@ -53,12 +48,13 @@ export default {
         }
       }
     },
-    AddShopList() {
+    AddShopList(e) {
+      console.log(e);
       this.nextnum += 1;
       const shop = {
-        name: this.Input.name,
-        amout: this.Input.amout,
-        price: this.Input.price,
+        name: e.name,
+        amout: e.amount,
+        price: e.price,
         done: false,
       };
       shop.id = this.nextnum;
@@ -89,6 +85,7 @@ export default {
   },
   components: {
     ShopItem,
+    AddingItemContainer,
   },
 };
 </script>

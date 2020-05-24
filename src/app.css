@@ -1,0 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.center {
+    margin: auto;
+}
+
+.CursorPointer {
+    cursor: pointer;
+}
+
+.Modal {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    background-color: pink;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+}
+
+.Modal .Header {
+    display: flex;
+    border-radius: 12px;
+    padding: 0.3em 0;
+    color: white;
+    font-size: 2em;
+}
+
+.Modal .Content {
+    transition: max-height 0.15s linear;
+    margin: 0 1.2em 1.2em;
+    overflow: hidden;
+    max-height: 0;
+}
+
+.Modal.open > .Content {
+    transition: max-height 0.15s linear;
+    max-height: 500px;
+}
